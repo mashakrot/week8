@@ -12,42 +12,73 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText textInput;
-    private TextView textOutput;
-    private int fontSize;
-
+    private EditText no1, no2;
+    private TextView answer;
+    private Button add, sub, mul, div;
+    private double result = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textInput = findViewById(R.id.editTextInput);
-        textOutput = findViewById(R.id.textViewOutput);
+        no1 = findViewById(R.id.editFirstNumber);
+        no2 = findViewById(R.id.editSecondNumber);
 
-        fontSize = 14;
-    }
+        add = findViewById(R.id.plusButton);
+        sub = findViewById(R.id.minusButton);
+        mul = findViewById(R.id.multiplyButton);
+        div = findViewById(R.id.divideButton);
 
-    public void transformText(View view) {
-        Log.d("Transformer application", textInput.getText().toString());
+        answer = findViewById(R.id.textSeeResult);
 
-
-        StringBuilder sb = new StringBuilder(textInput.getText().toString());
-        sb.reverse();
-
-        Toast.makeText(this, sb.toString(), Toast.LENGTH_LONG).show();
-
-        textOutput.setText(sb.toString());
-    }
-
-    public void increaseTextSize(View view) {
-        textOutput.setTextSize(++fontSize);
-    }
-
-    public void decreaseTextSize(View view) {
-        textOutput.setTextSize(--fontSize);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double a = Double.parseDouble(no1.getText().toString());
+                double b = Double.parseDouble(no2.getText().toString());
+                result = a + b;
+                String outputText = String.valueOf(result);
+                answer.setText(outputText);
+                result = 0;
+            }
+        });
+        sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double a = Double.parseDouble(no1.getText().toString());
+                double b = Double.parseDouble(no2.getText().toString());
+                result = a - b;
+                String outputText = String.valueOf(result);
+                answer.setText(outputText);
+                result = 0;
+            }
+        });
+        mul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double a = Double.parseDouble(no1.getText().toString());
+                double b = Double.parseDouble(no2.getText().toString());
+                result = a*b;
+                String outputText = String.valueOf(result);
+                answer.setText(outputText);
+                result = 0;
+            }
+        });
+        div.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double a = Double.parseDouble(no1.getText().toString());
+                double b = Double.parseDouble(no2.getText().toString());
+                result = a/b;
+                String outputText = String.valueOf(result);
+                answer.setText(outputText);
+                result = 0;
+            }
+        });
     }
 }
